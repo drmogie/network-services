@@ -1,5 +1,5 @@
 name: Technitium DNS
-version: "2026.09.28.02"
+version: "2026.09.28.03"
 slug: technitium_dns
 description: Run your own Technitium DNS Server inside Home Assistant
 url: https://github.com/drmogie/network-services

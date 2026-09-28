@@ -1,7 +1,7 @@
 # Network Services
 
 [![Add repository to my Home Assistant][repo-badge]][repo-url]
-![Version](https://img.shields.io/badge/version-2026.09.28.02-blue)
+![Version](https://img.shields.io/badge/version-2026.09.28.03-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 Home Assistant add-on repository for network services.
@@ -26,6 +26,8 @@ See [technitium_dns/DOCS.md](technitium_dns/DOCS.md) for all options.
 Technitium DNS Server is made by
 [Technitium](https://github.com/TechnitiumSoftware/DnsServer).
 This project only wraps the official Docker image.
+The Technitium logo belongs to Technitium. It is used here only to
+show which software the add-on runs.
 
 ## License
 

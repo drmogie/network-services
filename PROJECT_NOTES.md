@@ -35,3 +35,15 @@
   instead of using `exec`.
 - Not confirmed: usernames are made lowercase by Technitium (script
   lowercases the name itself). NOT tested live. Test on ha-pi4.
+
+## 2026-09-28: logo and icon (2026.09.28.03)
+
+- Source: Technitium's own public repo,
+  `DnsServerCore/www/img/logo.png` (48x48 PNG). technitium.com is blocked
+  from the cloud container and the PC shell, so no larger version.
+- `icon.png` = 128x128 (upscaled from 48x48, a bit soft).
+- `logo.png` = 250x100, logo centered on transparent background.
+- If a bigger official logo is found, replace both files and bump the version.
+- Release order lesson: commit and push FIRST, then create the release.
+  On .02 a stuck git lock stopped the commit and the release was made
+  anyway, so tag .02 points at the old commit.

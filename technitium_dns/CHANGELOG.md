@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026.09.28.03
+
+- Added the Technitium logo and icon.
+
 ## 2026.09.28.02
 
 - New option: admin_username.
