@@ -6,9 +6,10 @@ FROM technitium/dns-server:${TECHNITIUM_TAG}
 
 USER root
 
-# jq reads the add-on options. tzdata makes the time zone option work.
+# jq reads the add-on options. curl talks to the Technitium API.
+# tzdata makes the time zone option work.
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends jq tzdata \
+    && apt-get install -y --no-install-recommends curl jq tzdata \
     && rm -rf /var/lib/apt/lists/*
 
 COPY run.sh /usr/local/bin/ha-run.sh

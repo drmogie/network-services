@@ -1,7 +1,7 @@
 # Network Services
 
 [![Add repository to my Home Assistant][repo-badge]][repo-url]
-![Version](https://img.shields.io/badge/version-2026.09.28.01-blue)
+![Version](https://img.shields.io/badge/version-2026.09.28.02-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 Home Assistant add-on repository for network services.

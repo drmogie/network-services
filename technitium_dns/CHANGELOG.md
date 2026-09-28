@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026.09.28.02
+
+- New option: admin_username.
+- On start, the built-in admin user is renamed to that name.
+- If the rename fails, the user "admin" still works.
+
 ## 2026.09.28.01
 
 - First release.

@@ -7,12 +7,22 @@ Runs the official Technitium DNS Server.
 1. Install and start the add-on.
 2. Click **Open web UI**, or go to `http://<your-ha-ip>:5380`.
 3. Log in.
-   - If you set **admin_password**, use that. The user is `admin`.
-   - If you left it empty, the user is `admin` and the password is `admin`.
+   - The user is `admin`, or the name you set in **admin_username**.
+   - If you set **admin_password**, use that.
+   - If you left it empty, the password is `admin`.
      Change it right away.
 
 ## Options
 
+- **admin_username**
+  - Default: `admin`.
+  - Set a different name to rename the built-in admin user.
+  - The name is made lowercase.
+  - It renames the user on start. It does not add a second user.
+  - It logs in with `admin_password` (or `admin` if empty) to do this.
+  - If you changed the password in the web page, set `admin_password`
+    to the same password. Or rename the user in the web page.
+  - If the rename fails, `admin` still works. Check the add-on log.
 - **admin_password**
   - Sets the first admin password.
   - It only works on the very first start.

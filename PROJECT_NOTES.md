@@ -20,3 +20,18 @@
   entrypoint `dotnet DnsServerApp.dll`, no STOPSIGNAL (docker stop sends
   SIGTERM). Not confirmed that Technitium shuts down cleanly on SIGTERM.
   Watch for slow stops on ha-pi4.
+
+## 2026-09-28: admin_username option (2026.09.28.02)
+
+- Technitium always makes the first user `admin`. Env vars only set the
+  password. So `run.sh` now starts the server in the background, waits for
+  port 5380, logs in as `admin`, and calls
+  `/api/admin/users/set?user=admin&newUser=<name>` (checked in APIDOCS.md).
+- Idempotent: first tries to log in as the new name. If that works, done.
+- If login or rename fails, it only logs a message. `admin` keeps working.
+- Login uses `admin_password`, or `admin` if empty. If the user changed the
+  password in the web page and the option does not match, it skips.
+- Added curl to the image. The script now forwards SIGTERM to dotnet
+  instead of using `exec`.
+- Not confirmed: usernames are made lowercase by Technitium (script
+  lowercases the name itself). NOT tested live. Test on ha-pi4.
