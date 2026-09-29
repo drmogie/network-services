@@ -10,10 +10,12 @@ API=http://127.0.0.1:5380
 ADMIN_PASSWORD=""
 ADMIN_USERNAME=""
 TIMEZONE=""
+SERVER_DOMAIN=""
 if [ -f "$OPTIONS" ]; then
     ADMIN_PASSWORD="$(jq -r '.admin_password // empty' "$OPTIONS")"
     ADMIN_USERNAME="$(jq -r '.admin_username // empty' "$OPTIONS")"
     TIMEZONE="$(jq -r '.timezone // empty' "$OPTIONS")"
+    SERVER_DOMAIN="$(jq -r '.dns_server_domain // empty' "$OPTIONS")"
 fi
 
 # Time zone.
@@ -29,8 +31,8 @@ if [ -n "$ADMIN_PASSWORD" ]; then
     export DNS_SERVER_ADMIN_PASSWORD="$ADMIN_PASSWORD"
 fi
 
-# Set this so the server has a friendly name on first start.
-export DNS_SERVER_DOMAIN="${DNS_SERVER_DOMAIN:-technitium-dns}"
+# Server name (used on first start). The option wins if it is set.
+export DNS_SERVER_DOMAIN="${SERVER_DOMAIN:-${DNS_SERVER_DOMAIN:-technitium-dns}}"
 
 # Log in and print the session token. Prints nothing if login fails.
 # Usage: api_login <user> <password>
@@ -89,6 +91,56 @@ setup_admin_username() {
     fi
 }
 
+# Keep the server domain in step with the dns_server_domain option.
+# The environment variable only works on the very first start, so this
+# sets it through the API on later starts. Does nothing if the option is
+# empty. If anything fails, the current name stays.
+apply_server_domain() {
+    [ -n "$SERVER_DOMAIN" ] || return 0
+
+    i=0
+    while ! curl -fsS -m 3 -o /dev/null "$API/" 2>/dev/null; do
+        i=$((i + 1))
+        if [ "$i" -ge 30 ]; then
+            echo "[technitium_dns] Server domain skipped: web service did not start in time."
+            return 0
+        fi
+        sleep 2
+    done
+
+    PASS="${ADMIN_PASSWORD:-admin}"
+    WANT_USER="$(printf '%s' "$ADMIN_USERNAME" | tr 'A-Z' 'a-z')"
+    TOKEN=""
+    if [ -n "$WANT_USER" ]; then
+        TOKEN="$(api_login "$WANT_USER" "$PASS" || true)"
+    fi
+    if [ -z "$TOKEN" ]; then
+        TOKEN="$(api_login admin "$PASS" || true)"
+    fi
+    if [ -z "$TOKEN" ]; then
+        echo "[technitium_dns] Server domain skipped: could not log in."
+        return 0
+    fi
+
+    CURRENT="$(curl -fsS -m 10 -G "$API/api/settings/get" \
+        --data-urlencode "token=$TOKEN" 2>/dev/null \
+        | jq -r '.response.dnsServerDomain // empty' 2>/dev/null || true)"
+    if [ "$CURRENT" = "$SERVER_DOMAIN" ]; then
+        echo "[technitium_dns] Server domain is already '$SERVER_DOMAIN'."
+        return 0
+    fi
+
+    RESULT="$(curl -fsS -m 10 -G "$API/api/settings/set" \
+        --data-urlencode "token=$TOKEN" \
+        --data-urlencode "dnsServerDomain=$SERVER_DOMAIN" 2>/dev/null \
+        | jq -r '.status // "error"' 2>/dev/null || echo error)"
+    if [ "$RESULT" = "ok" ]; then
+        echo "[technitium_dns] Server domain set to '$SERVER_DOMAIN'."
+    else
+        echo "[technitium_dns] Could not set the server domain. It stays '${CURRENT:-unknown}'."
+    fi
+}
+
 mkdir -p "$DATA_DIR"
 
 echo "[technitium_dns] Starting Technitium DNS Server."
@@ -102,6 +154,6 @@ SERVER_PID=$!
 # Pass stop signals on to the server so it can shut down cleanly.
 trap 'kill -TERM "$SERVER_PID" 2>/dev/null; wait "$SERVER_PID"; exit $?' TERM INT
 
-setup_admin_username &
+( setup_admin_username; apply_server_domain ) &
 
 wait "$SERVER_PID"

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026.09.28.04
+
+- New option: dns_server_domain.
+- The name is set on first start and on every later start.
+- Empty means the add-on leaves the name alone.
+
 ## 2026.09.28.03
 
 - Added the Technitium logo and icon.

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026.09.28.04
+
+- Technitium DNS: new dns_server_domain option.
+
 ## 2026.09.28.03
 
 - Technitium DNS: added logo and icon.

@@ -1,5 +1,5 @@
 name: Technitium DNS
-version: "2026.09.28.03"
+version: "2026.09.28.04"
 slug: technitium_dns
 description: Run your own Technitium DNS Server inside Home Assistant
 url: https://github.com/drmogie/network-services
@@ -17,7 +17,9 @@ options:
   admin_username: "admin"
   admin_password: ""
   timezone: "America/Los_Angeles"
+  dns_server_domain: ""
 schema:
   admin_username: str?
   admin_password: password?
   timezone: str
+  dns_server_domain: str?
