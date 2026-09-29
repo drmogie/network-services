@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026.09.28.05
+
+- New: Home Assistant Ingress. A Technitium DNS item in the sidebar.
+- Uses a small nginx proxy on port 5381. Only Home Assistant can connect.
+- The old web page on port 5380 still works.
+
 ## 2026.09.28.04
 
 - New option: dns_server_domain.

@@ -151,8 +151,15 @@ cd /opt/technitium/dns
 /usr/bin/dotnet DnsServerApp.dll "$DATA_DIR" &
 SERVER_PID=$!
 
+# Small proxy for Home Assistant Ingress (sidebar item). If it fails to
+# start, the direct web page on port 5380 still works.
+mkdir -p /tmp/nginx-ingress
+nginx -c /etc/technitium-ingress.conf &
+NGINX_PID=$!
+echo "[technitium_dns] Ingress proxy started on port 5381."
+
 # Pass stop signals on to the server so it can shut down cleanly.
-trap 'kill -TERM "$SERVER_PID" 2>/dev/null; wait "$SERVER_PID"; exit $?' TERM INT
+trap 'kill -TERM "$NGINX_PID" 2>/dev/null; kill -TERM "$SERVER_PID" 2>/dev/null; wait "$SERVER_PID"; exit $?' TERM INT
 
 ( setup_admin_username; apply_server_domain ) &
 

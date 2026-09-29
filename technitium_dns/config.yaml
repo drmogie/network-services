@@ -1,5 +1,5 @@
 name: Technitium DNS
-version: "2026.09.28.04"
+version: "2026.09.28.05"
 slug: technitium_dns
 description: Run your own Technitium DNS Server inside Home Assistant
 url: https://github.com/drmogie/network-services
@@ -12,6 +12,11 @@ boot: auto
 host_network: true
 hassio_api: false
 webui: http://[HOST]:[PORT:5380]
+ingress: true
+ingress_port: 5381
+panel_icon: mdi:dns
+panel_title: Technitium DNS
+panel_admin: true
 watchdog: http://[HOST]:[PORT:5380]/
 options:
   admin_username: "admin"

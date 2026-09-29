@@ -1,7 +1,7 @@
 # Network Services
 
 [![Add repository to my Home Assistant][repo-badge]][repo-url]
-![Version](https://img.shields.io/badge/version-2026.09.28.03-blue)
+![Version](https://img.shields.io/badge/version-2026.09.28.05-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 Home Assistant add-on repository for network services.
@@ -17,7 +17,8 @@ Home Assistant add-on repository for network services.
    Settings, Add-ons, Add-on Store, three-dot menu, Repositories.
 2. Add this URL: `https://github.com/drmogie/network-services`
 3. Install **Technitium DNS**.
-4. Start it and open `http://<your-ha-ip>:5380`.
+4. Start it and open **Technitium DNS** in the sidebar,
+   or go to `http://<your-ha-ip>:5380`.
 
 See [technitium_dns/DOCS.md](technitium_dns/DOCS.md) for all options.
 

@@ -45,6 +45,7 @@ This add-on uses the host network. These ports are used:
 
 - `53` TCP and UDP: DNS.
 - `5380` TCP: web page.
+- `5381` TCP: sidebar (Ingress). Only Home Assistant can use it.
 
 Other ports open only if you turn on that feature in Technitium:
 
@@ -75,9 +76,17 @@ Other ports open only if you turn on that feature in Technitium:
   do not turn on Technitium DHCP while your router DHCP is on.
   Two DHCP servers cause problems.
 
-## Not in this version
+## Sidebar (Ingress)
 
-- Home Assistant Ingress (the sidebar item) is not set up yet.
-  Use the **Open web UI** button or port 5380.
+- The add-on adds a **Technitium DNS** item to the Home Assistant sidebar.
+- It shows the Technitium web page inside Home Assistant.
+- Only admin users in Home Assistant see it.
+- You still log in to Technitium itself.
+- The old way still works: **Open web UI**, or port 5380.
+- Port 5381 is used inside the add-on for this. Only Home Assistant
+  can use it.
+- If the sidebar page looks broken, use port 5380 and tell me what you saw.
+
+## Not in this version
 - This version has not been tested on a live Home Assistant yet.
   Please report what you see in the add-on log.

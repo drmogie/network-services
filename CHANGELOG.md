@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026.09.28.05
+
+- Technitium DNS: Home Assistant Ingress (sidebar item).
+
 ## 2026.09.28.04
 
 - Technitium DNS: new dns_server_domain option.
