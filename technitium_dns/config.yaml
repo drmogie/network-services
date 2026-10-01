@@ -1,5 +1,5 @@
 name: Technitium DNS
-version: "2026.09.28.05"
+version: "2026.09.30.01"
 slug: technitium_dns
 description: Run your own Technitium DNS Server inside Home Assistant
 url: https://github.com/drmogie/network-services
@@ -9,7 +9,30 @@ arch:
 init: false
 startup: services
 boot: auto
-host_network: true
+ports:
+  5380/tcp: 5380
+  53/tcp: 53
+  53/udp: 53
+  53443/tcp: null
+  853/tcp: null
+  853/udp: null
+  443/tcp: null
+  443/udp: null
+  80/tcp: null
+  8053/tcp: null
+  67/udp: null
+ports_description:
+  5380/tcp: DNS web console (HTTP)
+  53/tcp: DNS service (TCP)
+  53/udp: DNS service (UDP)
+  53443/tcp: DNS web console (HTTPS)
+  853/tcp: DNS-over-TLS service
+  853/udp: DNS-over-QUIC service
+  443/tcp: DNS-over-HTTPS service (HTTP/1.1, HTTP/2)
+  443/udp: DNS-over-HTTPS service (HTTP/3)
+  80/tcp: DNS-over-HTTP service (reverse proxy or certbot renewal)
+  8053/tcp: DNS-over-HTTP service (use with reverse proxy)
+  67/udp: DHCP service (only works with a DHCP relay, see Docs)
 hassio_api: false
 webui: http://[HOST]:[PORT:5380]
 ingress: true

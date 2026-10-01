@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026.09.30.01
+
+- New: each port can be turned on or off in the add-on Network settings.
+- On by default: 5380 web page, 53 DNS (TCP and UDP).
+- Off by default: 53443, 853 (TCP and UDP), 443 (TCP and UDP), 80, 8053, 67.
+- Changed: the add-on no longer uses the host network.
+- DHCP now works only with a DHCP relay.
+- Check your port settings after you update.
+
 ## 2026.09.28.05
 
 - New: Home Assistant Ingress. A Technitium DNS item in the sidebar.

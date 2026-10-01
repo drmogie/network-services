@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026.09.30.01
+
+- Technitium DNS: ports can be turned on or off. No longer uses the host network.
+
 ## 2026.09.28.05
 
 - Technitium DNS: Home Assistant Ingress (sidebar item).

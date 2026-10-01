@@ -41,18 +41,36 @@ Runs the official Technitium DNS Server.
 
 ## Ports
 
-This add-on uses the host network. These ports are used:
+You choose which ports are open. Each port is a switch.
 
-- `53` TCP and UDP: DNS.
+- Open the add-on, then the **Configuration** tab, then **Network**.
+- Type a port number to turn a port on.
+- Clear the box to turn a port off.
+- You can also type a different host port, such as `5354` for DNS.
+
+On by default:
+
 - `5380` TCP: web page.
-- `5381` TCP: sidebar (Ingress). Only Home Assistant can use it.
+- `53` TCP and UDP: DNS.
 
-Other ports open only if you turn on that feature in Technitium:
+Off by default (turn on what you use):
 
-- `53443` web page over HTTPS.
-- `443` DNS over HTTPS.
-- `853` DNS over TLS.
-- `67` DHCP.
+- `53443` TCP: web page over HTTPS.
+- `853` TCP: DNS over TLS.
+- `853` UDP: DNS over QUIC.
+- `443` TCP and UDP: DNS over HTTPS.
+- `80` TCP: DNS over HTTP (reverse proxy or certbot).
+- `8053` TCP: DNS over HTTP (reverse proxy).
+- `67` UDP: DHCP.
+
+Notes:
+
+- A port only works if the matching feature is also on in Technitium.
+- Ports 80 and 443 may already be used by another add-on, such as a proxy.
+- The sidebar (Ingress) always works. It does not need a port.
+- DHCP: the add-on no longer uses the host network. Devices cannot
+  reach DHCP by broadcast. It works only with a DHCP relay on your router.
+- Old version note: before 2026.09.30.01 the add-on used the host network.
 
 ## Use it as your network DNS
 
