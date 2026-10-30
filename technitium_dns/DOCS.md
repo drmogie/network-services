@@ -29,7 +29,7 @@ Runs the official Technitium DNS Server.
   - After that, change the password in the Technitium web page.
   - Changing this option later does nothing.
 - **dns_server_domain**
-  - The name of the DNS server, for example `mogie.io`.
+  - The name of the DNS server, for example `example.com`.
   - Default: empty. Empty means the add-on does not change it.
   - If you set it, the add-on sets it on every start.
     It logs in with the same rules as the admin username step.
